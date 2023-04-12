@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cohorte index{% endblock %}
+
+{% block body %}
+    <h1>Cohorte index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>CodeCohorte</th>
+                <th>DateDebut</th>
+                <th>DateFin</th>
+                <th>NombreParticipants</th>
+                <th>Parrain</th>
+                <th>IdFormation</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cohorte in cohortes %}
+            <tr>
+                <td>{{ cohorte.id }}</td>
+                <td>{{ cohorte.CodeCohorte }}</td>
+                <td>{{ cohorte.DateDebut ? cohorte.DateDebut|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ cohorte.DateFin ? cohorte.DateFin|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ cohorte.NombreParticipants }}</td>
+                <td>{{ cohorte.Parrain }}</td>
+                <td>{{ cohorte.IdFormation }}</td>
+                <td>
+                   
+            <form method="post" action="{{ path('app_cohorte_delete', {'id': cohorte.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                    <a href="{{ path('app_cohorte_show', {'id': cohorte.id}) }}">show</a>
+                    <a href="{{ path('app_cohorte_edit', {'id': cohorte.id}) }}">edit</a>
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ cohorte.id) }}">
+            <button class="btn">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_cohorte_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cohorte{% endblock %}
+
+{% block body %}
+    <h1>Cohorte</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ cohorte.id }}</td>
+            </tr>
+            <tr>
+                <th>CodeCohorte</th>
+                <td>{{ cohorte.CodeCohorte }}</td>
+            </tr>
+            <tr>
+                <th>DateDebut</th>
+                <td>{{ cohorte.DateDebut ? cohorte.DateDebut|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateFin</th>
+                <td>{{ cohorte.DateFin ? cohorte.DateFin|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>NombreParticipants</th>
+                <td>{{ cohorte.NombreParticipants }}</td>
+            </tr>
+            <tr>
+                <th>Parrain</th>
+                <td>{{ cohorte.Parrain }}</td>
+            </tr>
+            <tr>
+                <th>IdFormation</th>
+                <td>{{ cohorte.IdFormation }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_cohorte_index') }}">back to list</a>
+
+    <a href="{{ path('app_cohorte_edit', {'id': cohorte.id}) }}">edit</a>
+
+    {% endblock %}
